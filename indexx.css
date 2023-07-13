@@ -1,3 +1,49 @@
-#heading{
-    color: red;
+
+
+.header{
+    display:flex;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+
+
+.logoClass{
+  
+    width: 150px;
+}
+.nav{
+    padding: 0px 20px;
+}
+
+.nav > ul{
+    display: flex;
+    list-style-type: none;
+    font-size: large;
+}
+
+.nav > ul > li{
+    margin: 10;
+    padding: 10px;
+}
+
+.res-logo{
+    height: 100px;
+    width : 170px;
+    padding: 0px 15px;
+}
+.resCard{
+    margin: 5px;
+    height: 280px;
+    width: 200px;
+    padding:5px;
+    background-color: rgb(249, 243, 243);
+    
+}
+.resCard:hover{
+    cursor: pointer;
+    border: 1px solid black;
+}
+.restroContainer{
+    display: flex;
+    flex-wrap: wrap;
 }
