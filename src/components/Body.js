@@ -55,7 +55,7 @@ const Body = () => {
           className="filter-but"
           onClick={() => {
             const filtered = listofres.filter((res) => res.data.avgRating >= 4);
-            setlistofres(filtered);
+            setfiteredres(filtered);
           }}
         >
           filter button
