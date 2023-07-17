@@ -6,8 +6,9 @@ import { MENU_URL } from "../utils/constants";
 
 
 const RestroMenu =() =>{
-    const[resItem,setresItem]=useState(null);
+    
     const {resId} = useParams();
+    const[resItem] =userRestroMenu(resId);
 
     useEffect(() =>{
         fetchmenu();
