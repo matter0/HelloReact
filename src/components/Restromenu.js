@@ -3,26 +3,17 @@ import React from 'react';
 import Shimmer from "../Shimmer";
 import { useParams } from "react-router-dom";
 import { MENU_URL } from "../utils/constants";
+import userRestroMenu from "../utils/useRestroMenu";
 
 
 const RestroMenu =() =>{
     
     const {resId} = useParams();
-    const[resItem] =userRestroMenu(resId);
-
-    useEffect(() =>{
-        fetchmenu();
-    },[]);
-
-    const fetchmenu =async ()=>{
-        console.log("fuck");
-        const data=await fetch (MENU_URL+resId);
-        const json_data =await data.json();
-        console.log(json_data.data);
-        setresItem(json_data.data);
-    }
-
+    const resItem = userRestroMenu(resId);
     console.log(resItem);
+    
+
+   
     if(resItem  === null){
         console.log("here");
         return <Shimmer/>;
