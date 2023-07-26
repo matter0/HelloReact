@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import resList from "../utils/mockdata";
-import RestroCard from "./RestroCard";
+import RestroCard, { withPromoted } from "./RestroCard";
 import Shimmer from "../Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import React from "react";
 
 const Body = () => {
   const [listofres, setlistofres] = useState([]);
   const [searchText, setsearchText] = useState("");
   const [filteredres, setfiteredres] = useState([]);
+
+  const RestroPromoted = withPromoted(RestroCard);
   useEffect(() => {
     fetchdata();
   }, []);
@@ -28,27 +31,27 @@ const Body = () => {
   console.log(listofres);
   onlineStat = useOnlineStatus();
   if (onlineStat === false) {
-    return (<h1> You are offline please connect back to internet</h1>);
+    return <h1> You are offline please connect back to internet</h1>;
   }
 
-  if (listofres.length === 0) {
-    return <Shimmer />;
-  }
+  // if (listofres.length === 0) {
+  //   return <Shimmer />;
+  // }
 
- 
-    return (
+  return (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex items-center ">
+        <div className="search m-4 p-4 space-x-4">
           <input
-            type="text"     
-            className="search-box"
+            type="text"
+            className=" border border-solid border-black rounded-xl"
             value={searchText}
             onChange={(e) => {
               setsearchText(e.target.value);
             }}
           />
           <button
+            className="px-2 py-1 bg-green-200 rounded-xl"
             onClick={() => {
               const filteredres = listofres.filter((res) =>
                 res.data.name.toLowerCase().includes(searchText.toLowerCase())
@@ -60,24 +63,28 @@ const Body = () => {
             Search
           </button>
         </div>
-        <button
-          className="filter-but"
-          onClick={() => {
-            const filtered = listofres.filter((res) => res.data.avgRating >= 4);
-            setfiteredres(filtered);
-          }}
-        >
-          filter button
-        </button>
+        <div className="m-4 p-4 space-x-4  ">
+          <button
+            className="m-2 px-2 py-1 bg-blue-200 flex rounded-xl"
+            onClick={() => {
+              const filtered = listofres.filter(
+                (res) => res.data.avgRating >= 4
+              );
+              setfiteredres(filtered);
+            }}
+          >
+            filter button
+          </button>
+        </div>
       </div>
-      <div className="restroContainer">
+      <div className="flex flex-wrap">
         {filteredres.map((restaurant) => (
           <Link
             key={restaurant.data.id}
             to={"/restraunt/" + restaurant.data.id}
           >
-            {" "}
-            <RestroCard resdata={restaurant} />{" "}
+            {restaurant.data.promoted ? ( <RestroPromoted resdata = {restaurant}/>) : (<RestroCard resdata={restaurant} />) };
+           
           </Link>
         ))}
       </div>
