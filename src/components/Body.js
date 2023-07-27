@@ -23,9 +23,10 @@ const Body = () => {
     );
 
     const json_data = await fdata.json();
+    
 
-    setlistofres(json_data?.data?.cards[2]?.data?.data?.cards);
-    setfiteredres(json_data?.data?.cards[2]?.data?.data?.cards);
+    setlistofres(json_data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setfiteredres(json_data?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   };
 
   console.log(listofres);
@@ -54,7 +55,7 @@ const Body = () => {
             className="px-2 py-1 bg-green-200 rounded-xl"
             onClick={() => {
               const filteredres = listofres.filter((res) =>
-                res.data.name.toLowerCase().includes(searchText.toLowerCase())
+                res.info.name.toLowerCase().includes(searchText.toLowerCase())
               );
 
               setfiteredres(filteredres);
@@ -68,7 +69,7 @@ const Body = () => {
             className="m-2 px-2 py-1 bg-blue-200 flex rounded-xl"
             onClick={() => {
               const filtered = listofres.filter(
-                (res) => res.data.avgRating >= 4
+                (res) => res.info.avgRating >= 4
               );
               setfiteredres(filtered);
             }}
@@ -80,10 +81,10 @@ const Body = () => {
       <div className="flex flex-wrap">
         {filteredres.map((restaurant) => (
           <Link
-            key={restaurant.data.id}
-            to={"/restraunt/" + restaurant.data.id}
+            key={restaurant.info.id}
+            to={"/restraunt/" + restaurant.info.id}
           >
-            {restaurant.data.promoted ? ( <RestroPromoted resdata = {restaurant}/>) : (<RestroCard resdata={restaurant} />) };
+            {restaurant.info.promoted ? ( <RestroPromoted resdata = {restaurant.info}/>) : (<RestroCard resdata={restaurant.info} />) };
            
           </Link>
         ))}

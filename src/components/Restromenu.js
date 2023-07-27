@@ -17,7 +17,7 @@ const RestroMenu = () => {
   }
 
   const { name, cuisines, costForTwoMessage } =
-    resItem?.cards[0].card.card.info;
+    resItem?.cards[0]?.card?.card?.info;
 
   const { itemCards } =
     resItem?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
@@ -34,7 +34,7 @@ const RestroMenu = () => {
   return (
     <div className="text-center">
       <h1 className="font-bold text-lg">{name}</h1>
-      <h2 classname="font-bold">{cuisines.join(", ")}</h2>
+      <h2 className="font-bold">{cuisines.join(", ")}</h2>
       <h2 className="font-bold text-xs">{costForTwoMessage}</h2>
       {categories.map((category) => <RestrauntCategory data={category?.card.card}/>)}
       

@@ -3,14 +3,14 @@ import { CDN_URL } from "../utils/constants";
 const RestroCard = (props) => {
  
   const { resdata } = props;
-  const { name, avgRating, deliveryTime, costForTwo ,cuisines} = resdata?.data;
+  const { name, avgRating, deliveryTime, costForTwo ,cuisines} = resdata;
   return (
     <div className="m-4 p-4 w-[250px] h-[300x] bg-gray-300 rounded-lg hover:bg-orange-300">
       <img
         className="rounded-lg"
         src={
           CDN_URL +
-          resdata.data.cloudinaryImageId
+          resdata.cloudinaryImageId
         }
       />
       <h3 className="font-bold">{name}</h3>
