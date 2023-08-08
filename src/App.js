@@ -7,22 +7,28 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestroMenu from "./components/Restromenu";
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const App = () => {
   return (
-    <div>
-      <Header />
-      <Outlet />
-    </div>
+    <Provider store={appStore}>
+      <div>
+        <Header />
+        <Outlet />
+      </div>
+    </Provider>
   );
 };
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children:[
+    children: [
       {
         path: "/about",
         element: <About />,
@@ -36,17 +42,25 @@ const appRouter = createBrowserRouter([
         element: <Body />,
       },
       {
-        path :"/restraunt/:resId",
-        element : <RestroMenu/>,
+        path: "/restraunt/:resId",
+        element: <RestroMenu />,
       },
       {
-        path:"/grocery",
-        element: <Suspense fallback={<h1> We are loading Grocery please wait</h1>}> <Grocery/> </Suspense>,
-      }
+        path : "/cart",
+        element :<Cart/>,
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<h1> We are loading Grocery please wait</h1>}>
+            {" "}
+            <Grocery />{" "}
+          </Suspense>
+        ),
+      },
     ],
-    errorElement:<Error/>,
+    errorElement: <Error />,
   },
-  
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<RouterProvider router={appRouter} />);

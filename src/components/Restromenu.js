@@ -9,7 +9,7 @@ import RestrauntCategory from "../RestrauntCategory";
 const RestroMenu = () => {
   const { resId } = useParams();
   const resItem = userRestroMenu(resId);
-  
+  const[showIndex,setshowIndex]=useState(0);
 
   if (resItem === null) {
     console.log("here");
@@ -36,7 +36,10 @@ const RestroMenu = () => {
       <h1 className="font-bold text-lg">{name}</h1>
       <h2 className="font-bold">{cuisines.join(", ")}</h2>
       <h2 className="font-bold text-xs">{costForTwoMessage}</h2>
-      {categories.map((category) => <RestrauntCategory data={category?.card.card}/>)}
+      {categories.map((category , index) => <RestrauntCategory key={category.card.card.title} data={category?.card.card}
+       showItem={index  === showIndex ? true : false}
+       setshowIndex={()=>setshowIndex(index)  }
+      />)}
       
       
     </div>

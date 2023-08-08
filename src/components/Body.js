@@ -35,9 +35,9 @@ const Body = () => {
     return <h1> You are offline please connect back to internet</h1>;
   }
 
-  // if (listofres.length === 0) {
-  //   return <Shimmer />;
-  // }
+   if (listofres.length === 0) {
+     return <Shimmer />;
+    }
 
   return (
     <div className="body">

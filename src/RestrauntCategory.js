@@ -2,10 +2,10 @@ import { useState } from "react";
 import ItemList from "./components/ItemList";
 
 
-const RestrauntCategory = ({ data }) => {
-    const[showItem,setshowItem]=useState(false);
+const RestrauntCategory = ({ data , showItem ,setshowIndex}) => {
+    
     const handleClick =() =>{
-        showItem ? setshowItem(false) : setshowItem(true);
+        setshowIndex();
     }
   return (
     <div>
