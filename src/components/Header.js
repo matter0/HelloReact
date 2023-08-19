@@ -21,7 +21,7 @@ const Header = () => {
           <li className="px-5 font-bold ">
             <Link to="/">Home</Link>
           </li>
-          <li className="px-5 font-bold text-xl" > <Link to ='/cart'> Cart  ({cartItems.length} items) </Link></li>
+          <li className="px-5 font-bold text-xl" > <Link to ='/cart'> 🛒  ({cartItems.length} ) </Link></li>
           <li className="px-5 font-bold" >
             <Link to="/contact">Contact us</Link>
           </li>

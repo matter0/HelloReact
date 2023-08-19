@@ -1,14 +1,25 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CDN_URL } from "../utils/constants";
-import { addItem } from "../utils/cartSlice";
+import { addItem, removeItem } from "../utils/cartSlice";
+import { decrementValue, incrementValue } from "../utils/cartValueSlice";
 
 const ItemList = ({ items }) => {
+ 
+ 
   const dispatch=useDispatch();
-
+  const cartItems = useSelector((store) => store.cart.items);
+  
   const handleAddItem = (item) =>{
     dispatch(addItem(item));
+   
+    dispatch(incrementValue(item.card.info.price ));
   } 
-
+  const handleRemoveItem =(item) =>{
+    dispatch(removeItem(item));
+  
+    dispatch(decrementValue(item.card.info.price));
+  }
+ 
   return (
     <div>
       {items.map((item) => (
@@ -30,7 +41,10 @@ const ItemList = ({ items }) => {
           </div>
           <div className="w-3/12 p-4">
             <div className="absolute  ">
-            <button className="p-2 mx-18 my-11 bg-black text-white shadow-lg   rounded-lg  " onClick={() => handleAddItem(item)}>+ Add</button>
+            <button className="p-2 mx-18 my-11 bg-black text-white shadow-lg   rounded-lg  " onClick={() => handleAddItem(item)}>+</button>
+            </div>
+            <div className=" absolute mx-8">
+            <button className="p-2 my-11 mx-20  bg-black text-white shadow-lg   rounded-lg  " onClick={() => handleRemoveItem(item)}>-</button>
             </div>
             <img src={CDN_URL + item.card.info.imageId} className="w-full"/>
             

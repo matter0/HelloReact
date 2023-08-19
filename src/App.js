@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
+import Payment from "./components/Payment";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const App = () => {
@@ -48,6 +49,10 @@ const appRouter = createBrowserRouter([
       {
         path : "/cart",
         element :<Cart/>,
+      },
+      {
+        path : "/payment",
+        element :<Payment/>,
       },
       {
         path: "/grocery",
